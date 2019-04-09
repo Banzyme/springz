@@ -48,6 +48,12 @@ public class AssetManagerController {
         }
     }
 
+    @PatchMapping("update/{id}")
+    public  ResponseEntity<Void> UpdateAsset(@PathVariable("id") Long ID, @RequestBody Asset asset){
+        _service.UpdateAsset(ID, asset);
+        return new ResponseEntity("Item "+ ID +" successfully updated!",HttpStatus.NO_CONTENT);
+    }
+
 
     @DeleteMapping("delete/{id}")
     public  ResponseEntity<Void> DeleteAsset(@PathVariable("id") Long ID){
