@@ -20,9 +20,8 @@ const getAllAssets = (element)=>{
 
 
 const getAssetById = (element)=>{
-
-    const id = 1;
-    const URL = '/api/assets/1';
+    const id = $('#endpoint-single').val().split('/').slice(-1);
+    const URL = `/api/assets/${id}`;
      try{
          makeAjaxCall('GET', element, URL, null);
      }catch(e){ console.error(e.message) };
