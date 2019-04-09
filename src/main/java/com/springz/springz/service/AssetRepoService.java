@@ -3,11 +3,18 @@ package com.springz.springz.service;
 import com.springz.springz.dao.IAssetRepo;
 import com.springz.springz.models.Asset;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AssetRepoService implements  IAssetRepoService{
 
-    @Autowired
+
     private IAssetRepo _assetRepo;
+
+    @Autowired
+    public AssetRepoService(IAssetRepo _assetRepo) {
+        this._assetRepo = _assetRepo;
+    }
 
     public Iterable<Asset> FindAllAssets() {
         return null;

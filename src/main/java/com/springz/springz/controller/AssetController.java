@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("assets")
 public class AssetController {
 
-    @Autowired
     private IAssetRepoService _assetService;
+
+    @Autowired
+    public AssetController(IAssetRepoService _assetService) {
+        this._assetService = _assetService;
+    }
 
     @GetMapping("/create")
     public String AddAssertForm(Model model){
