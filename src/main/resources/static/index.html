@@ -5,7 +5,63 @@
     <title>Springz | Asset manager</title>
 </head>
 <body>
-<h1>Index</h1>
+
     <a href="/assets/create" th:href="@{~/assets}">Get started</a>
+
+    <header>
+        <h1>What is Springz</h1>
+        <p>Springz is a simple Spring Boot application built to demonstrate how to use spring to develop a RestFul
+            Service on the web.<br>
+            The API endpoints can be tested through a Spring Boot MVC application or any other api testing serrvice
+            such as Postman.
+        </p>
+    </header>
+
+    <main>
+
+        <h2>List of endpoints</h2>
+        <hr>
+
+        <section>
+            <h4>List items</h4>
+            <p>
+                <h6>Instructions</h6>
+                <span> In order to access this endpoint you need to be authorized with Springz. If you only want to test
+                the API, you can use the guest API Token: <b>eyhnfhhas72kp</b></span>
+            </p>
+            <div class="results-container">
+                <label for="endpoint-editor">Endpoint</label>
+                <input id="endpoint-editor" type="text" value="http://localhost:8080/api/assets" disabled />
+
+                <span class="json-container">
+
+                </span>
+            </div>
+            <button id="list-all" type="button">Submit request</button>
+        </section>
+
+        <section>
+            <h4>Get single item</h4>
+        </section>
+
+        <section>
+            <h4>Update item</h4>
+        </section>
+
+        <section>
+            <h4>Add item</h4>
+        </section>
+
+        <section>
+            <h4>Delete items</h4>
+        </section>
+
+    </main>
+
+    <footer>
+        <small>Made with love by <a href="">ENDEESA</a>@PeculiaDev </small>
+    </footer>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./js/main.js" type="text/javascript"></script>
 </body>
 </html>
