@@ -43,7 +43,7 @@ public class AssetManagerController {
         if(result == true){
             Object myobj = new Object() {
                 public final boolean success = true;
-                public  final  String message = "Successfully added asset to assets table.";
+                public  final  String message = "Successfully added item to assets table.";
             };
             return new ResponseEntity(myobj,HttpStatus.OK);
         }else{
@@ -57,7 +57,8 @@ public class AssetManagerController {
         _service.UpdateAsset(ID, asset);
 
         Object myobj = new Object() {
-            public final boolean success = true;
+            public final boolean succeded = true;
+            public  final  String message = "Successfully updated asset.";
         };
         return new ResponseEntity(myobj,HttpStatus.OK);
 //        return new ResponseEntity("Item "+ ID +" successfully updated!",HttpStatus.NO_CONTENT);

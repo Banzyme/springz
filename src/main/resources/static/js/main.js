@@ -87,7 +87,7 @@ $(document).ready(function () {
         $.ajax({
             url: url,
             method: method,
-            data: JSON.parse(data),
+            data: JSON.stringify(data),
             dataType: 'json',
             contentType:'application/json',
             error: (err) => { console.log("Ajax failed to make api request: ", err); },
