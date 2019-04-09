@@ -1,30 +1,30 @@
 package com.springz.springz.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "assets")
 public class Asset {
     @Id
-    @GeneratedValue( strategy = GenerationType.AUTO)
-    private Integer ID;
-    @NotEmpty
-    @NotNull
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long ID;
+
+    @Column(name = "Name")
     private  String name;
+
+    @Column(name = "Description")
     private String description;
-    @NotEmpty
-    @NotNull
+
+    @Column(name = "State")
     private  String state;
 
-    public Integer getID() {
+    public Long getID() {
         return ID;
     }
 
-    public void setID(Integer ID) {
+    public void setID(Long ID) {
         this.ID = ID;
     }
 

@@ -11,7 +11,7 @@
     </header>
 
     <section>
-        <form action="#" th:action="@{/create}" th:object="${asset}" method="post">
+        <form action="#" th:action="@{/assets/create}" th:object="${asset}" method="post">
 
             <p>Name: <input type="text" th:field="*{name}" /></p>
             <p>Description: <input type="text" th:field="*{description}" /></p>

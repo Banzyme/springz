@@ -29,7 +29,6 @@ public class AssetController {
 
     @PostMapping("/create")
     public  String SaveAssert(@ModelAttribute Asset asset){
-
         _assetService.CreateAsset(asset);
         return "confirmation";
     }

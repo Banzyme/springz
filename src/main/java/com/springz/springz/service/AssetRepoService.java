@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 public class AssetRepoService implements  IAssetRepoService{
 
 
+    @Autowired
     private IAssetRepo _assetRepo;
 
-    @Autowired
+
     public AssetRepoService(IAssetRepo _assetRepo) {
         this._assetRepo = _assetRepo;
     }
