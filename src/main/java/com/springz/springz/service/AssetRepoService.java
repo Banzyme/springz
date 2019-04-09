@@ -18,23 +18,33 @@ public class AssetRepoService implements  IAssetRepoService{
     }
 
     public Iterable<Asset> FindAllAssets() {
-        return null;
+        return _assetRepo.findAll();
     }
 
     public Iterable<Asset> FindUsersAssets(Long UserId) {
-        return null;
+        return _assetRepo.findByOwnerID(UserId);
     }
 
 
     public Asset FindAssetByID(Long ID) {
-        return null;
+        return _assetRepo.findById(ID).get();
     }
 
-    public void UpdateAsset(Long ID) {
+    public void UpdateAsset(Long ID, Asset updated) {
+        var assetToUpdate = FindAssetByID(ID);
 
+        assetToUpdate.setName(updated.getName());
+        assetToUpdate.setDescription(updated.getDescription());
+
+        _assetRepo.save(assetToUpdate);
     }
 
     public void DeleteAsset(Long ID) {
+        try{
+            _assetRepo.delete(FindAssetByID(ID));
+        }catch (Exception e){
+            // Todo
+        }
 
     }
 

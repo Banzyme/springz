@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface IAssetRepo extends JpaRepository<Asset, Long> {
-//    List<Asset> findByName(String name);
-//    List<Asset> findByState(String state);
+    Iterable<Asset> findByName(String name);
+    Iterable<Asset> findByOwnerID(Long OwnerId);
 }

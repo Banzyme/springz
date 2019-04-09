@@ -20,6 +20,10 @@ public class Asset {
     @Column(name = "State")
     private  String state;
 
+    @Column(name= "Owner")
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    public long OwnerId;
+
     public Long getID() {
         return ID;
     }
