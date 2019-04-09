@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Springz | Asset manager</title>
 </head>
+
 <body>
 
     <a href="/assets/create" th:href="@{~/assets}">Get started</a>
@@ -27,7 +29,7 @@
             <p>
                 <h6>Instructions</h6>
                 <span> In order to access this endpoint you need to be authorized with Springz. If you only want to test
-                the API, you can use the guest API Token: <b>eyhnfhhas72kp</b></span>
+                    the API, you can use the guest API Token: <b>eyhnfhhas72kp</b></span>
             </p>
             <div class="results-container">
                 <label for="endpoint-editor">Endpoint</label>
@@ -36,8 +38,8 @@
                 <b class="sample-response-heading">Sample response</b>
                 <span id="json-list-all">
                     {
-                        id: 1,
-                        name: 'name'
+                    id: 1,
+                    name: 'name'
                     }
                 </span>
             </div>
@@ -49,13 +51,13 @@
 
             <div class="results-container">
                 <label for="endpoint-single">Endpoint</label>
-                <input id="endpoint-single" type="text" value="http://localhost:8080/api/assets/1"  />
+                <input id="endpoint-single" type="text" value="http://localhost:8080/api/assets/1" />
 
                 <b class="sample-response-heading">Sample response</b>
                 <span id="json-list-one">
                     {
-                        id: 1,
-                        name: 'name'
+                    id: 1,
+                    name: 'name'
                     }
                 </span>
             </div>
@@ -65,14 +67,56 @@
 
         <section>
             <h4>Update item</h4>
+
+            <div class="results-container">
+                <label for="endpoint-update">Endpoint</label>
+                <input id="endpoint-update" type="text" value="http://localhost:8080/api/update/1" />
+
+                <b class="sample-response-heading">Sample response</b>
+                <span id="json-list-one">
+                    {
+                    id: 1,
+                    name: 'name'
+                    }
+                </span>
+            </div>
+            <button id="update-btn" type="button">Update item</button>
         </section>
 
         <section>
             <h4>Add item</h4>
+
+            <div class="results-container">
+                <label for="endpoint-single">Endpoint</label>
+                <input id="endpoint-single" type="text" value="http://localhost:8080/api/add" />
+
+                <b class="sample-response-heading">Sample response</b>
+                <span id="json-create">
+                    {
+                    id: 1,
+                    name: 'name'
+                    }
+                </span>
+            </div>
+            <button id="create-btn" type="button">Submit request</button>
         </section>
 
         <section>
             <h4>Delete items</h4>
+
+            <div class="results-container">
+                <label for="endpoint-delete">Endpoint</label>
+                <input id="endpoint-delete" type="text" value="http://localhost:8080/api/delete/1" />
+
+                <b class="sample-response-heading">Sample response</b>
+                <span id="json-delete">
+                    {
+                    id: 1,
+                    name: 'name'
+                    }
+                </span>
+            </div>
+            <button id="delete-btn" type="button">Delete item</button>
         </section>
 
     </main>
@@ -80,7 +124,8 @@
     <footer>
         <small>Made with love by <a href="">ENDEESA</a>@PeculiaDev </small>
     </footer>
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="./js/main.js" type="text/javascript"></script>
 </body>
+
 </html>
