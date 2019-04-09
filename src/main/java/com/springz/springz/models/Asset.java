@@ -22,7 +22,15 @@ public class Asset {
 
     @Column(name= "Owner")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    public long OwnerId;
+    private long owner;
+
+    public long getOwner() {
+        return owner;
+    }
+
+    public void setOwner(long owner) {
+        this.owner = owner;
+    }
 
     public Long getID() {
         return ID;

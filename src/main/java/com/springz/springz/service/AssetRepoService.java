@@ -5,6 +5,9 @@ import com.springz.springz.models.Asset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AssetRepoService implements  IAssetRepoService{
 
@@ -17,12 +20,21 @@ public class AssetRepoService implements  IAssetRepoService{
         this._assetRepo = _assetRepo;
     }
 
-    public Iterable<Asset> FindAllAssets() {
-        return _assetRepo.findAll();
+    public List<Asset> FindAllAssets() {
+
+        try{
+            List<Asset> results = new ArrayList<>();
+            _assetRepo.findAll().forEach(item -> results.add((item)));
+            return results;
+        }
+        catch (Exception e) {
+            throw  new Error("Failed to fetch asset list: " + e.getMessage());
+//            return  null;
+        }
     }
 
     public Iterable<Asset> FindUsersAssets(Long UserId) {
-        return _assetRepo.findByOwnerID(UserId);
+        return _assetRepo.findByOwner(UserId);
     }
 
 
@@ -48,9 +60,10 @@ public class AssetRepoService implements  IAssetRepoService{
 
     }
 
-    public void CreateAsset(Asset asset) {
+    public boolean CreateAsset(Asset asset) {
         try {
             _assetRepo.save(asset);
+            return true;
         }catch (Exception e){
             throw  new Error("Asset cant be created!");
         }
