@@ -41,7 +41,11 @@ public class AssetManagerController {
         var result = _service.CreateAsset(asset);
 
         if(result == true){
-            return new ResponseEntity(HttpStatus.CREATED);
+            Object myobj = new Object() {
+                public final boolean success = true;
+                public  final  String message = "Successfully added asset to assets table.";
+            };
+            return new ResponseEntity(myobj,HttpStatus.OK);
         }else{
             // TODO: Describe
             return  new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -51,7 +55,12 @@ public class AssetManagerController {
     @PatchMapping("update/{id}")
     public  ResponseEntity<Void> UpdateAsset(@PathVariable("id") Long ID, @RequestBody Asset asset){
         _service.UpdateAsset(ID, asset);
-        return new ResponseEntity("Item "+ ID +" successfully updated!",HttpStatus.NO_CONTENT);
+
+        Object myobj = new Object() {
+            public final boolean success = true;
+        };
+        return new ResponseEntity(myobj,HttpStatus.OK);
+//        return new ResponseEntity("Item "+ ID +" successfully updated!",HttpStatus.NO_CONTENT);
     }
 
 

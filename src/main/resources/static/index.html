@@ -8,7 +8,7 @@
 
 <body>
 
-    <a href="/assets/create" th:href="@{~/assets}">Get started</a>
+    <a href="/assets/create" th:href="@{~/assets/create}">Get started</a>
 
     <header>
         <h1>What is Springz</h1>
@@ -72,6 +72,10 @@
                 <label for="endpoint-update">Endpoint</label>
                 <input id="endpoint-update" type="text" value="http://localhost:8080/api/update/1" />
 
+                <input type="text" name="asset-name" id="asset-name1" placeholder="Enter asset name e.g. Dell G3">
+                <input type="text" name="asset-descr" id="asset-descr1" placeholder="Enter asset description">
+                <input type="text" name="asset-state" id="asset-state1" placeholder="e.g. In a good condition">
+
                 <b class="sample-response-heading">Sample response</b>
                 <span id="json-list-one">
                     {
@@ -90,6 +94,10 @@
                 <label for="endpoint-single">Endpoint</label>
                 <input id="endpoint-single" type="text" value="http://localhost:8080/api/add" />
 
+                <input type="text" name="asset-name" id="asset-name" placeholder="Enter asset name e.g. Dell G3">
+                <input type="text" name="asset-descr" id="asset-descr" placeholder="Enter asset description">
+                <input type="text" name="asset-state" id="asset-state" placeholder="e.g. In a good condition">
+
                 <b class="sample-response-heading">Sample response</b>
                 <span id="json-create">
                     {
@@ -98,7 +106,7 @@
                     }
                 </span>
             </div>
-            <button id="create-btn" type="button">Submit request</button>
+            <button id="create-btn" type="button">Add item</button>
         </section>
 
         <section>
@@ -107,6 +115,7 @@
             <div class="results-container">
                 <label for="endpoint-delete">Endpoint</label>
                 <input id="endpoint-delete" type="text" value="http://localhost:8080/api/delete/1" />
+
 
                 <b class="sample-response-heading">Sample response</b>
                 <span id="json-delete">

@@ -10,11 +10,11 @@ $(document).ready(function () {
     });
 
     $('#create-btn').on('click', () => {
-        getAssetById('json-create');
+        createAsset('json-create');
     });
 
     $('#update-btn').on('click', () => {
-        getAssetById('json-update');
+        updateAsset('json-update');
     });
 
     $('#delete-btn').on('click', () => {
@@ -39,8 +39,37 @@ $(document).ready(function () {
         } catch (e) { console.error(e.message) };
     }
 
+    const createAsset = (element)=>{
+        const URL = `/api/add/`;
+        const data = {
+            id: null,
+            name: $('#asset-name').val(),
+            description: $('#asset-descr').val(),
+            state: $('#asset-state').val(),
+            owner: null,
+        };
+
+        console.log('Data object: ', data);
+
+        try {
+            makeAjaxCall('POST', element, URL, data);
+        } catch (e) { console.error(e.message) };
+    }
+
     const updateAsset = (element)=>{
         const id = $('#endpoint-update').val().split('/').slice(-1);
+        const URL = `/api/update/${id}`;
+        const data = {
+            id: null,
+            name: $('#asset-name1').val(),
+            description: $('#asset-descr1').val(),
+            state: $('#asset-state').val(),
+            owner: null,
+        };
+
+        try {
+            makeAjaxCall('PATCH', element, URL, data);
+        } catch (e) { console.error(e.message) };
     }
 
     const deleteAsset = (element)=>{
@@ -58,9 +87,10 @@ $(document).ready(function () {
         $.ajax({
             url: url,
             method: method,
-            data: data,
+            data: JSON.parse(data),
             dataType: 'json',
-            error: (err) => { console.log("Failed to fetch: ", err); },
+            contentType:'application/json',
+            error: (err) => { console.log("Ajax failed to make api request: ", err); },
             success: (response) => { 
                 updateDom(response, elementId); 
             },
