@@ -2,7 +2,9 @@
 * Bootstrapped using spring-initializr at https://start.spring.io/
 
 <hr>
+
 ## Core dependancies
+
 * Web
 * Thymeleaf
 * Security 
