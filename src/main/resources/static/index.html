@@ -24,10 +24,43 @@
 
         <section>
             <h4>List items</h4>
+            <p>
+                <h6>Instructions</h6>
+                <span> In order to access this endpoint you need to be authorized with Springz. If you only want to test
+                the API, you can use the guest API Token: <b>eyhnfhhas72kp</b></span>
+            </p>
+            <div class="results-container">
+                <label for="endpoint-editor">Endpoint</label>
+                <input id="endpoint-editor" type="text" value="http://localhost:8080/api/assets" disabled />
+
+                <b class="sample-response-heading">Sample response</b>
+                <span id="json-list-all">
+                    {
+                        id: 1,
+                        name: 'name'
+                    }
+                </span>
+            </div>
+            <button id="list-all" type="button">Submit request</button>
         </section>
 
         <section>
             <h4>Get single item</h4>
+
+            <div class="results-container">
+                <label for="endpoint-single">Endpoint</label>
+                <input id="endpoint-single" type="text" value="http://localhost:8080/api/assets/1"  />
+
+                <b class="sample-response-heading">Sample response</b>
+                <span id="json-list-one">
+                    {
+                        id: 1,
+                        name: 'name'
+                    }
+                </span>
+            </div>
+            <button id="list-one" type="button">Submit request</button>
+
         </section>
 
         <section>
