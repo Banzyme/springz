@@ -18,7 +18,7 @@ $(document).ready(function () {
     });
 
     $('#delete-btn').on('click', () => {
-        getAssetById('json-delete');
+        deleteAsset('json-delete');
     });
 
 
@@ -39,6 +39,19 @@ $(document).ready(function () {
         } catch (e) { console.error(e.message) };
     }
 
+    const updateAsset = (element)=>{
+        const id = $('#endpoint-update').val().split('/').slice(-1);
+    }
+
+    const deleteAsset = (element)=>{
+        const id = $('#endpoint-delete').val().split('/').slice(-1);
+        const URL = `/api/delete/${id}`;
+
+        try {
+            makeAjaxCall('DELETE', element, URL, null);
+        } catch (e) { console.error(e.message) };
+    }
+
 
     // Helper functions
     const makeAjaxCall = (method, elementId, url, data) => {
@@ -48,11 +61,14 @@ $(document).ready(function () {
             data: data,
             dataType: 'json',
             error: (err) => { console.log("Failed to fetch: ", err); },
-            success: (response) => { updateDom(response, elementId); },
+            success: (response) => { 
+                updateDom(response, elementId); 
+            },
         });
     }
 
     const updateDom = (data, element) => {
+        if(!data) return;
         const jsonContainer = document.getElementById(element);
         console.log('Data,', Array.from(data));
 
