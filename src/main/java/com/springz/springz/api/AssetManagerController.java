@@ -40,18 +40,23 @@ public class AssetManagerController {
         if(asset != null){
             return new ResponseEntity(_service.FindAssetByID(ID), HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+        Object notFound = new Object(){
+            public final boolean succeeded= false;
+            public final String message = APIResponseMsg.ERR_MSG_GETBY_ID;
+        };
+        return new ResponseEntity(notFound, HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("add")
-    public ResponseEntity<Void> AddAsset(@RequestBody Asset asset) {
+    public ResponseEntity<AjaxResponseCustom> AddAsset(@RequestBody Asset asset) {
         boolean result = _service.CreateAsset(asset);
 
         return this.GenerateNoContentResponse(result, APIResponseMsg.ERR_MSG_CREATE);
     }
 
     @PatchMapping("update/{id}")
-    public ResponseEntity<Void> UpdateAsset(@PathVariable("id") Long ID, @RequestBody Asset asset) {
+    public ResponseEntity<AjaxResponseCustom> UpdateAsset(@PathVariable("id") Long ID, @RequestBody Asset asset) {
         boolean result = _service.UpdateAsset(ID, asset);
 
         return this.GenerateNoContentResponse(result, APIResponseMsg.ERR_MSG_UPDATE);
@@ -59,7 +64,7 @@ public class AssetManagerController {
 
 
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<Void> DeleteAsset(@PathVariable("id") Long ID) {
+    public ResponseEntity<AjaxResponseCustom> DeleteAsset(@PathVariable("id") Long ID) {
         // use async await maybe??
         boolean result = _service.DeleteAsset(ID);
         return this.GenerateNoContentResponse(result, APIResponseMsg.ERR_MSG_DELETE);
@@ -67,11 +72,11 @@ public class AssetManagerController {
 
 
     // private helpers
-    private ResponseEntity<Void> GenerateNoContentResponse(boolean result, String msg){
+    private ResponseEntity<AjaxResponseCustom> GenerateNoContentResponse(boolean result, String msg){
         String errorMsg = msg == null || msg == ""? "Server error." : msg;
         if (result == true) {
             Object resp = new AjaxResponseCustom();
-            return new ResponseEntity(resp, HttpStatus.NO_CONTENT);
+            return new ResponseEntity(resp, HttpStatus.OK);
         } else {
             Object resp = new AjaxResponseCustom(false, errorMsg);
             return new ResponseEntity(

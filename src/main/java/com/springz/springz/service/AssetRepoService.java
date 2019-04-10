@@ -42,22 +42,28 @@ public class AssetRepoService implements  IAssetRepoService{
 
 
     public Asset FindAssetByID(Long ID) {
-        return _assetRepo.findById(ID).get();
+        try{
+            return _assetRepo.findById(ID).get();
+        }catch (Exception e){
+            this.logger.error("Item not found. Received ID " + ID + ". Exception details: " + e.getMessage());
+            return null;
+        }
+
     }
 
     public boolean UpdateAsset(Long ID, Asset updated) {
-        var assetToUpdate = FindAssetByID(ID);
-
-        if( !(updated.getName() != "" && updated.getName() != null) ) assetToUpdate.setName( updated.getName());
-        if( !(updated.getState() != "" && updated.getState() != null) ) assetToUpdate.setState( updated.getState());
-        if( !(updated.getDescription() != "" && updated.getDescription() != null) ) assetToUpdate.setDescription(updated.getDescription());
-
         try{
+            var assetToUpdate = FindAssetByID(ID);
+
+            if( (updated.getName() != "" && updated.getName() != null) ) assetToUpdate.setName( updated.getName());
+            if( (updated.getState() != "" && updated.getState() != null) ) assetToUpdate.setState( updated.getState());
+            if( (updated.getDescription() != "" && updated.getDescription() != null) ) assetToUpdate.setDescription(updated.getDescription());
             _assetRepo.save(assetToUpdate);
+
             return  true;
         }catch (Exception e){
             // LOG Error message
-            this.logger.error("Failed to update asset: " + assetToUpdate.toString() + ". Exception details: " + e.getMessage());
+            this.logger.error("Failed to update asset with Id: " + ID + ". Exception details: " + e.getMessage());
             return  false;
         }
     }
