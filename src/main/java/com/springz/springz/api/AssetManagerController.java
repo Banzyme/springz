@@ -1,5 +1,7 @@
 package com.springz.springz.api;
 
+import com.springz.springz.constants.APIResponseMsg;
+import com.springz.springz.models.AjaxResponseCustom;
 import com.springz.springz.models.Asset;
 import com.springz.springz.service.IAssetRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,7 @@ public class AssetManagerController {
     }
 
     @GetMapping("/assets")
-    public ResponseEntity<List<Asset>> GetAllAssets(){
+    public ResponseEntity<List<Asset>> GetAllAssets() {
         List<Asset> results = new ArrayList<>();
 
         _service.FindAllAssets().forEach(item -> results.add((item)));
@@ -32,44 +34,48 @@ public class AssetManagerController {
     }
 
     @GetMapping("assets/{id}")
-    public  ResponseEntity<Asset> GetAssetById(@PathVariable("id") Long ID){
-        return new ResponseEntity(_service.FindAssetByID(ID), HttpStatus.OK);
+    public ResponseEntity<Asset> GetAssetById(@PathVariable("id") Long ID) {
+        var asset = _service.FindAssetByID(ID);
+
+        if(asset != null){
+            return new ResponseEntity(_service.FindAssetByID(ID), HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("add")
-    public ResponseEntity<Void> AddAsset(@RequestBody Asset asset){
-        var result = _service.CreateAsset(asset);
+    public ResponseEntity<Void> AddAsset(@RequestBody Asset asset) {
+        boolean result = _service.CreateAsset(asset);
 
-        if(result == true){
-            Object myobj = new Object() {
-                public final boolean success = true;
-                public  final  String message = "Successfully added item to assets table.";
-            };
-            return new ResponseEntity(myobj,HttpStatus.OK);
-        }else{
-            // TODO: Describe
-            return  new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
+        return this.GenerateNoContentResponse(result, APIResponseMsg.ERR_MSG_CREATE);
     }
 
     @PatchMapping("update/{id}")
-    public  ResponseEntity<Void> UpdateAsset(@PathVariable("id") Long ID, @RequestBody Asset asset){
-        _service.UpdateAsset(ID, asset);
+    public ResponseEntity<Void> UpdateAsset(@PathVariable("id") Long ID, @RequestBody Asset asset) {
+        boolean result = _service.UpdateAsset(ID, asset);
 
-        Object myobj = new Object() {
-            public final boolean succeded = true;
-            public  final  String message = "Successfully updated asset.";
-        };
-        return new ResponseEntity(myobj,HttpStatus.OK);
-//        return new ResponseEntity("Item "+ ID +" successfully updated!",HttpStatus.NO_CONTENT);
+        return this.GenerateNoContentResponse(result, APIResponseMsg.ERR_MSG_UPDATE);
     }
 
 
     @DeleteMapping("delete/{id}")
-    public  ResponseEntity<Void> DeleteAsset(@PathVariable("id") Long ID){
-       // use async await maybe??
-        _service.DeleteAsset(ID);
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    public ResponseEntity<Void> DeleteAsset(@PathVariable("id") Long ID) {
+        // use async await maybe??
+        boolean result = _service.DeleteAsset(ID);
+        return this.GenerateNoContentResponse(result, APIResponseMsg.ERR_MSG_DELETE);
+    }
+
+
+    // private helpers
+    private ResponseEntity<Void> GenerateNoContentResponse(boolean result, String msg){
+        String errorMsg = msg == null || msg == ""? "Server error." : msg;
+        if (result == true) {
+            return new ResponseEntity(new AjaxResponseCustom(), HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity(
+                    new AjaxResponseCustom(false, errorMsg),
+                    HttpStatus.BAD_REQUEST);
+        }
     }
 }
 

@@ -9,7 +9,7 @@ public interface IAssetRepoService {
     List<Asset> FindAllAssets();
     Iterable<Asset> FindUsersAssets(Long UserId);
     Asset FindAssetByID(Long ID);
-    void UpdateAsset(Long ID, Asset updated);
-    void DeleteAsset(Long ID);
+    boolean UpdateAsset(Long ID, Asset updated);
+    boolean DeleteAsset(Long ID);
     boolean CreateAsset(Asset asset);
 }
