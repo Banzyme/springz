@@ -70,10 +70,12 @@ public class AssetManagerController {
     private ResponseEntity<Void> GenerateNoContentResponse(boolean result, String msg){
         String errorMsg = msg == null || msg == ""? "Server error." : msg;
         if (result == true) {
-            return new ResponseEntity(new AjaxResponseCustom(), HttpStatus.NO_CONTENT);
+            Object resp = new AjaxResponseCustom();
+            return new ResponseEntity(resp, HttpStatus.NO_CONTENT);
         } else {
+            Object resp = new AjaxResponseCustom(false, errorMsg);
             return new ResponseEntity(
-                    new AjaxResponseCustom(false, errorMsg),
+                    resp,
                     HttpStatus.BAD_REQUEST);
         }
     }

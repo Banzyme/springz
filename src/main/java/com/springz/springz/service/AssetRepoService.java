@@ -48,8 +48,9 @@ public class AssetRepoService implements  IAssetRepoService{
     public boolean UpdateAsset(Long ID, Asset updated) {
         var assetToUpdate = FindAssetByID(ID);
 
-        assetToUpdate.setName(updated.getName());
-        assetToUpdate.setDescription(updated.getDescription());
+        if( !(updated.getName() != "" && updated.getName() != null) ) assetToUpdate.setName( updated.getName());
+        if( !(updated.getState() != "" && updated.getState() != null) ) assetToUpdate.setState( updated.getState());
+        if( !(updated.getDescription() != "" && updated.getDescription() != null) ) assetToUpdate.setDescription(updated.getDescription());
 
         try{
             _assetRepo.save(assetToUpdate);
